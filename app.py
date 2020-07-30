@@ -9,7 +9,6 @@ import os
 from src.anti_spoof_predict import AntiSpoofPredict
 from src.generate_patches import CropImage
 from src.utility import parse_model_name
-# warnings.filterwarnings('ignore')
 
 print("[File]: ",torch.__file__)
 print("[Version]: ",torch.__version__)
