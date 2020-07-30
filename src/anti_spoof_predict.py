@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-# @Time : 20-6-9 上午10:20
-# @Author : zhuying
-# @Company : Minivision
-# @File : anti_spoof_predict.py
-# @Software : PyCharm
-
 import os
 import cv2
 import math
@@ -44,16 +37,14 @@ class Detection:
         blob = cv2.dnn.blobFromImage(img, 1, mean=(104, 117, 123))
         self.detector.setInput(blob, 'data')
         out = self.detector.forward('detection_out').squeeze()
-        # print("shape of out: ", out.shape)
+
         for i in range(0, out.shape[0]):
             confidence = out[i, 2]
-            # print("Faces: ",faces)
             if confidence > 0.6:
                 faces = faces+1
 
                 if(faces>1):
                     return [],faces
-                    # print("faces: ", faces)
 
         max_conf_index = np.argmax(out[:, 2])
         left, top, right, bottom = out[max_conf_index, 3]*width, out[max_conf_index, 4]*height, \
