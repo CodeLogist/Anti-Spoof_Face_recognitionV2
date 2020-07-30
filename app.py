@@ -1,12 +1,6 @@
-print("API Called")
 from flask import Flask, jsonify, request
-
 import face_recognition
-print("Face_recognition imported")
-
 import torch
-print("Torch imported")
-
 import urllib
 import cv2
 import numpy as np
@@ -25,22 +19,11 @@ model_dir = "./resources/anti_spoof_models"
 model_test = AntiSpoofPredict()
 image_cropper = CropImage()
 
-app = Flask(__name__)
+server = Flask(__name__)
 
-@app.route("/", methods = ["POST"])
+@server.route("/", methods = ["POST"])
 def func():
     data = request.json
-    
-    #Call the the function to detect face:
-    # print("#"*1000)
-    # urls = [
-    #   "https://bekurovimages.s3.amazonaws.com/boys/20180829_161859_HDR.jpg",
-    #   "https://bekurovimages.s3.amazonaws.com/boys/54c8536d45ede.jpg",
-    #   "https://bekurovimages.s3.amazonaws.com/boys/56b8e9a793c80.jpg",
-    #   "https://bekurovimages.s3.amazonaws.com/boys/Aron+Hersh+Milech2.jpg"
-    # ]
-    # unknown_url = "https://bekurovimages.s3.amazonaws.com/boys/Avrum+Yakov+Klein2.jpg"
-
     urls = list(data["urls"])
     unknown_url = data["unknown_url"]
 
@@ -136,4 +119,4 @@ def func():
     return jsonify(statusCode = 200, body= body,error= error,message= message)
 
 if __name__ == "__main__":
-    app.run()
+    server.run()
