@@ -119,4 +119,4 @@ def func():
     return jsonify(statusCode = 200, body= body,error= error,message= message)
 
 if __name__ == "__main__":
-    server.run()
+    server.run(host='0.0.0.0', port = 80)
